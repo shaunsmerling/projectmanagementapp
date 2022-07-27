@@ -1,24 +1,5 @@
-# README
+# Simple Project Management Tool built in Ruby on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Create projects, set tasks, curate based on completion status, and reorder based on prioritization!
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Styled with Bootstrap
