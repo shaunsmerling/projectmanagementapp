@@ -1,0 +1,58 @@
+  <%= link_to "Back ", projects_path, class: "btn btn-info mb-3" %>
+<div class="bg-light card">
+  <div class="card-body">
+    <h2 class='card-title d-flex justify-content-between mb-4'>
+      <span><%= @project.name %></span>
+        <div class="btn-group">
+            <%= link_to "Edit ", edit_project_path(@project), class: "btn btn-secondary m-1 pl-1 pr-1 "%>
+            <%= button_to 'Destroy', @project, method: :delete, class: "btn btn-dark m-1 pl-1 pr-1", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+        </div>
+    </h2>
+    <div class="mb-4">
+    </div>
+
+
+    <h6>Add task</h6>
+    <%= form_for([@task.project, @task]) do |f| %>
+      <% if @task.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+        <ul>
+        <% @task.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+  <%= f.hidden_field :status, value: "not-started"%>
+  <div class="input-group mb-2">
+    <%= f.text_field :name, class: 'form-control', placeholder: "Enter task name " %>
+    <div class ="input-group-append">
+    <%= f.submit class: 'btn btn-primary m-2' %>
+    </div>
+  </div> 
+<% end %>
+ 
+  <h4>Tasks</h4>
+  <% @project.tasks.each do |task| %>
+    <% if task.persisted? %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <span class="badge bg-<%= task.badge_color %> mb-3"><%= task.status %></span>
+            <div class="btn-group ">
+              <%= link_to 'Edit', edit_project_task_path(task.project, task), class: "d-flex btn btn-secondary btn-sm m-1 pl-1 pr-1"  %>
+              <%= button_to 'Destroy', [task.project, task], method: :delete, class: "d-flex btn btn-dark btn-sm m-1 p-1", form: {data: {turbo_confirm: 'Are you sure?'}} %>
+            </div>
+          </div>
+          <h5 class='card-title mb-2'>
+            <span><%= task.name %></span>
+          </h5>
+            <p><%= task.description %></p>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
